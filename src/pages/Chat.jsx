@@ -4,7 +4,7 @@ import { Mic, MicOff, Send, Volume2, VolumeX, Loader2, Bot } from 'lucide-react'
 import axios from 'axios';
 import { saveConversation } from '../lib/firebase';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = 'https://apx-ai-backend.onrender.com';
 const API = `${BACKEND_URL}/api`;
 
 const Chat = () => {
