@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="APX AI Health Assistant" />
+    <title>APX AI Health Assistant</title>
+  <!-- Favicon -->
+  <link rel="icon" href="./Apx-ai-logo.svg" type="image/svg+xml" />
+
+    <!-- 🟢 Replace Emergent AI with Open Source -->
+    <!-- Session replay & user insights via OpenReplay -->
+    <script async src="https://static.openreplay.com/openreplay.js"></script>
+    <script>
+      window.__openreplay = {
+        projectKey: "YOUR_PROJECT_KEY",
+      };
+    </script>
+
+    <!-- Privacy-friendly analytics via Plausible -->
+    <script
+      async
+      defer
+      data-domain="yourdomain.com"
+      src="https://plausible.io/js/script.js"
+    ></script>
+
+    <!-- TailwindCSS CDN for visual customization -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    <!-- Open source session capture (alternative to rrweb/Posthog) -->
+    <script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
+    <script>
+      // Example rrweb initialization for dev testing
+      const events = [];
+      rrweb.record({
+        emit(event) {
+          events.push(event);
+        },
+      });
+    </script>
+
+    <!-- Optional: PostHog open version (self-hosted) -->
+    <script>
+      (function (t, e) {
+        var o, n, p, r;
+        e.__SV ||
+          ((window.posthog = e),
+          (e._i = []),
+          (e.init = function (i, s, a) {
+            function g(t, e) {
+              var o = e.split(".");
+              2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                (t[e] = function () {
+                  t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                });
+            }
+            ((p = t.createElement("script")).type = "text/javascript"),
+              (p.async = !0),
+              (p.src = s.api_host + "/static/array.js"),
+              (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(
+                p,
+                r
+              );
+            var u = e;
+            void 0 !== a ? (u = e[a] = []) : (a = "posthog");
+            u.people = u.people || [];
+            o =
+              "capture identify group reset get_distinct_id get_session_id".split(
+                " "
+              );
+            for (n = 0; n < o.length; n++) g(u, o[n]);
+            e._i.push([i, s, a]);
+          }),
+          (e.__SV = 1));
+      })(document, window.posthog || []);
+      posthog.init("YOUR_POSTHOG_KEY", {
+        api_host: "https://your-selfhosted-posthog.com",
+      });
+    </script>
+  </body>
+</html>
