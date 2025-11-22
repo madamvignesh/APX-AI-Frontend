@@ -140,7 +140,7 @@ const Chat = () => {
 
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
           className="bg-[#1E293B]/50 backdrop-blur-xl border border-cyan-500/20 rounded-3xl shadow-2xl shadow-cyan-500/10 overflow-hidden">
-          
+
           <div className="h-[500px] overflow-y-auto p-6 space-y-4">
             <AnimatePresence>
               {showWelcome && (
