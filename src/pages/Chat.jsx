@@ -4,8 +4,8 @@ import { Mic, MicOff, Send, Volume2, VolumeX, Loader2, Bot } from 'lucide-react'
 import axios from 'axios';
 import { saveConversation } from '../lib/firebase';
 
-// const BACKEND_URL = 'https://apx-ai-backend.onrender.com';
-const BACKEND_URL = 'http://localhost:8000';
+const BACKEND_URL = 'https://apx-ai-backend.onrender.com';
+// const BACKEND_URL = 'http://localhost:8000';
 const API = `${BACKEND_URL}/api`;
 
 const Chat = () => {
@@ -95,7 +95,7 @@ const Chat = () => {
 
   const handleSendMessage = async (messageText) => {
     const textToSend = typeof messageText === 'string' ? messageText : inputMessage;
-    
+
     if (!textToSend.trim() || isLoading) return;
 
     setShowWelcome(false);
