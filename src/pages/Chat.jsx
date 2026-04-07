@@ -4,8 +4,8 @@ import { Mic, MicOff, Send, Volume2, VolumeX, Loader2, Bot } from 'lucide-react'
 import axios from 'axios';
 import { saveConversation } from '../lib/firebase';
 
-const BACKEND_URL = 'https://apx-ai-backend.onrender.com';
 // const BACKEND_URL = 'https://apx-ai-backend.onrender.com';
+const BACKEND_URL = 'http://localhost:8000';
 const API = `${BACKEND_URL}/api`;
 
 const Chat = () => {
@@ -93,19 +93,21 @@ const Chat = () => {
     }
   };
 
-  const handleSendMessage = async (messageText = inputMessage) => {
-    if (!messageText.trim() || isLoading) return;
+  const handleSendMessage = async (messageText) => {
+    const textToSend = typeof messageText === 'string' ? messageText : inputMessage;
+    
+    if (!textToSend.trim() || isLoading) return;
 
     setShowWelcome(false);
     setIsLoading(true);
 
-    const userMessage = { role: 'user', content: messageText };
+    const userMessage = { role: 'user', content: textToSend };
     setMessages(prev => [...prev, userMessage]);
     setInputMessage('');
 
     try {
       const { data } = await axios.post(`${API}/chat`, {
-        message: messageText,
+        message: textToSend,
         conversation_id: conversationId,
       });
 
@@ -114,7 +116,7 @@ const Chat = () => {
       speakText(aiMessage.content);
 
       // Save asynchronously to Firebase
-      saveConversation(messageText, aiMessage.content, conversationId).catch(console.error);
+      saveConversation(textToSend, aiMessage.content, conversationId).catch(console.error);
     } catch (err) {
       console.error('Chat error:', err);
       const errorMsg = { role: 'assistant', content: 'Connection error. Call emergency services if urgent.' };
